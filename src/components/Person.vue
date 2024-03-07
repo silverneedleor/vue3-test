@@ -1,43 +1,43 @@
 <template>
   <div class="person">
-    <h2>姓名: {{ name }} </h2>
-    <h2>年龄: {{ age }}</h2>
-    <button @click="changeName">修改姓名</button>
-    <button @click="changeAge">修改年龄</button>
-    <button @click="showTel">显示电话号</button>
-    <h2>{{ a }}</h2>
+    <h2>这辆车的品牌是{{ car.brand }}, 价值是{{ car.price }}w</h2>
+    <button @click="changePrice">修改价格</button>
+    <h2>游戏列表: </h2>
+    <ul>
+      <li v-for="g in games" :key="g.id">{{g.name}}</li>
+    </ul>
+    <button @click="changeFirstGame">修改第一个游戏的名字</button>
   </div>
 </template>
 
 <!--setup语法糖自动return返回数据,不必每次修改完数据都再去写return-->
 <!--两个script中使用相同的lang,不写默认为js-->
 <script lang="ts" setup name="Person">
-// 响应式必备
-import {ref} from 'vue';
+import {reactive} from "vue";
 
-let a = '888888';
-// 响应式
-let name = ref('张三');
-let age = ref(18);
-let tel = '23456665';
+let car = reactive({brand: '奔驰', price: 100});
 
 
-function changeName() {
-  // 在script里面需要.value, 在template会自动解析
-  name.value = '李四';
-  console.log(name);
 
+console.log(car);
+console.log(Proxy);
+
+let games = reactive([
+    {id: '123456781',name:'王者荣耀'},
+    {id: '123456782',name:'原神'},
+    {id: '123456783',name:'三国志'}
+])
+
+
+
+function changePrice() {
+  car.price += 10;
+  console.log(car.price);
 }
 
-function changeAge() {
-  age.value += 1;
-  console.log(age);
+function changeFirstGame() {
+  games[0].name = '吃鸡游戏';
 }
-
-function showTel() {
-  alert(tel);
-}
-
 
 </script>
 
