@@ -1,37 +1,36 @@
 <template>
   <div class="person">
-        <h2>姓名: {{ name }} </h2>
-        <h2>年龄: {{ age }}</h2>
-        <button @click="changeName">修改姓名</button>
-        <button @click="changeAge">修改年龄</button>
-        <button @click="showTel">显示电话号</button>
+    <h2>姓名: {{ name }} </h2>
+    <h2>年龄: {{ age }}</h2>
+    <button @click="changeName">修改姓名</button>
+    <button @click="changeAge">修改年龄</button>
+    <button @click="showTel">显示电话号</button>
     <h2>{{ a }}</h2>
   </div>
 </template>
 
-<!--<script lang="ts">-->
-<!--export default {-->
-<!--  name: "Person",-->
-<!--};-->
-<!--</script>-->
-
 <!--setup语法糖自动return返回数据,不必每次修改完数据都再去写return-->
 <!--两个script中使用相同的lang,不写默认为js-->
-<script lang="ts" setup name="Person234">
+<script lang="ts" setup name="Person">
+// 响应式必备
+import {ref} from 'vue';
+
 let a = '888888';
-let name = '张三';
-let age = 18;
+// 响应式
+let name = ref('张三');
+let age = ref(18);
 let tel = '23456665';
 
 
 function changeName() {
-  name = '李四';
+  // 在script里面需要.value, 在template会自动解析
+  name.value = '李四';
   console.log(name);
 
 }
 
 function changeAge() {
-  age += 1;
+  age.value += 1;
   console.log(age);
 }
 
