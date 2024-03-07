@@ -5,36 +5,25 @@
     <button @click="changeName">修改姓名</button>
     <button @click="changeAge">修改年龄</button>
     <button @click="showTel">显示电话号</button>
-    <button @click="b">{{a}}</button>
-    <button @click="b">{{c}}</button>
+
   </div>
 </template>
 
 <script lang="ts">
 export default {
   name: "Person",
-  beforeCreate() {
-    console.log('beforeCreate')
-  },
-  data() {
-    return {
-      a: 10,
-      // 需要格外注意, setup的执行顺序优先,因此才能读到, 但是不能反过来
-      c: this.name,
-    }
-  },
-  methods: {
-    b() {
-      console.log('b')
-    },
-  },
+  // 验证在vue3中setup的优先级高
+  // beforeCreate() {
+  //   console.log('beforeCreate')
+  // },
   setup(){
   // 数据, 此时数据不是响应式的
     let name = '张三';
     let age = 18;
     let tel = '23456665';
 
-    console.log(this);
+    // 用来知道setup的this是undefined
+    // console.log(this);
 
     function changeName() {
       name = '李四';
