@@ -7,6 +7,10 @@
       <li v-for="g in games" :key="g.id">{{g.name}}</li>
     </ul>
     <button @click="changeFirstGame">修改第一个游戏的名字</button>
+    <hr>
+<!--测试reactive可以深层响应式-->
+    <h2>{{obj.a.c.d}}</h2>
+    <button @click="changeObjD">改变d的值</button>
   </div>
 </template>
 
@@ -15,13 +19,13 @@
 <script lang="ts" setup name="Person">
 import {reactive} from "vue";
 
+// 普通对象的响应式编程
 let car = reactive({brand: '奔驰', price: 100});
 
+// {brand: '奔驰', price: 100} 普通对象, 原对象
+// reactive({brand: '奔驰', price: 100}); 响应式对象
 
-
-console.log(car);
-console.log(Proxy);
-
+// 数组验证
 let games = reactive([
     {id: '123456781',name:'王者荣耀'},
     {id: '123456782',name:'原神'},
@@ -29,6 +33,14 @@ let games = reactive([
 ])
 
 
+// 验证reactive是深层对象的响应式
+let obj = reactive({
+  a:{
+    c:{
+      d: 100,
+    }
+  }
+})
 
 function changePrice() {
   car.price += 10;
@@ -37,6 +49,10 @@ function changePrice() {
 
 function changeFirstGame() {
   games[0].name = '吃鸡游戏';
+}
+
+function changeObjD() {
+  obj.a.c.d = 666;
 }
 
 </script>
