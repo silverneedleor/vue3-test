@@ -9,15 +9,15 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Person",
-};
-</script>
+<!--<script lang="ts">-->
+<!--export default {-->
+<!--  name: "Person",-->
+<!--};-->
+<!--</script>-->
 
 <!--setup语法糖自动return返回数据,不必每次修改完数据都再去写return-->
 <!--两个script中使用相同的lang,不写默认为js-->
-<script lang="ts" setup>
+<script lang="ts" setup name="Person234">
 let a = '888888';
 let name = '张三';
 let age = 18;
