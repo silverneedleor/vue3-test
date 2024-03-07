@@ -7,17 +7,14 @@
       <li v-for="g in games" :key="g.id">{{g.name}}</li>
     </ul>
     <button @click="changeFirstGame">修改第一个游戏的名字</button>
-    <hr>
-<!--测试reactive可以深层响应式-->
-    <h2>{{obj.a.c.d}}</h2>
-    <button @click="changeObjD">改变d的值</button>
+
   </div>
 </template>
 
 <!--setup语法糖自动return返回数据,不必每次修改完数据都再去写return-->
 <!--两个script中使用相同的lang,不写默认为js-->
 <script lang="ts" setup name="Person">
-import {reactive} from "vue";
+import {ref,reactive} from "vue";
 
 // 普通对象的响应式编程
 let car = reactive({brand: '奔驰', price: 100});
@@ -32,15 +29,16 @@ let games = reactive([
     {id: '123456783',name:'三国志'}
 ])
 
+let obj = ref({a: {c: 100}});
 
-// 验证reactive是深层对象的响应式
-let obj = reactive({
-  a:{
-    c:{
-      d: 100,
-    }
-  }
-})
+// 比较ref和reactive的不一样
+// ref的对于对象的响应, 底层实现是reactive
+// 在浏览器console上可以看到, 可以说ref是对reactive的封装
+// 如果car和games使用ref, 那么 car.price += 10; 应为 car.value.price += 10;
+// games[0].name = '吃鸡游戏'; 应为 games.value[0].name = '吃鸡游戏';
+console.log(car);
+console.log(obj)
+
 
 function changePrice() {
   car.price += 10;
@@ -49,10 +47,6 @@ function changePrice() {
 
 function changeFirstGame() {
   games[0].name = '吃鸡游戏';
-}
-
-function changeObjD() {
-  obj.a.c.d = 666;
 }
 
 </script>
