@@ -2,7 +2,6 @@
   <div class="app">
     <h1>nihao</h1>
     <Person/>
-    <person/>
 
   </div>
 </template>
